@@ -26,6 +26,6 @@
 		<div>
 			<%= link_to "Edit", edit_room_path(@room), class: 'button' %>
 			<%= link_to "Delete", edit_room_path(@room), class: 'button', method: :delete %>
-			<%= link_to "Book this room", book_room_path(@room), class: 'button' %>
+			<%= link_to "Book this room", edit_room_path(@room), class: 'button' %>
 
 		</div>

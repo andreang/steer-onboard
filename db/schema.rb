@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141114121339) do
+ActiveRecord::Schema.define(version: 20141114141606) do
 
   create_table "rooms", force: true do |t|
     t.integer "price_in_pence"
@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(version: 20141114121339) do
     t.integer "max_guests"
     t.boolean "pets"
     t.integer "used_id"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "username"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
