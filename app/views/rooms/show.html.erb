@@ -1,0 +1,31 @@
+<h1>Rooms#show</h1>
+
+	<h2><%= @room.name %></h2>
+
+		<div class="address">
+		<p><%= @room.address%></p>
+		</div>
+
+		<div class="image">
+		</div>
+
+		<div class="map" data-lat="<%= @room.latitude %>" data-lng="<%= @room.longitude %>">
+		</div>
+
+		<p>$<%= @room.price_in_pence / 100 %> per wk</p>
+
+		<div class="description">
+		<p><%= simple_format @room.description %></p>
+		</div>
+
+		<p><%= @room.no_of_rooms %> rooms</p>
+		<p><%= @room.max_guests %> guests</p>
+
+		<p>Enquire about this room with <%= mail_to @room.user.username, @room.user.email %>.</p>
+
+		<div>
+			<%= link_to "Edit", edit_room_path(@room), class: 'button' %>
+			<%= link_to "Delete", edit_room_path(@room), class: 'button', method: :delete %>
+			<%= link_to "Book this room", book_room_path(@room), class: 'button' %>
+
+		</div>

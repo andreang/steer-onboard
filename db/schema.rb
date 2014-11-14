@@ -14,20 +14,18 @@
 ActiveRecord::Schema.define(version: 20141114121339) do
 
   create_table "rooms", force: true do |t|
-    t.integer  "price_in_pence"
-    t.string   "name"
-    t.text     "description"
-    t.date     "availability"
-    t.string   "address"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.string   "phone_number"
-    t.integer  "no_of_rooms"
-    t.integer  "max_guests"
-    t.boolean  "pets"
-    t.integer  "used_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "price_in_pence"
+    t.string  "name"
+    t.text    "description"
+    t.date    "availability"
+    t.string  "address"
+    t.float   "latitude"
+    t.float   "longitude"
+    t.string  "phone_number"
+    t.integer "no_of_rooms"
+    t.integer "max_guests"
+    t.boolean "pets"
+    t.integer "used_id"
   end
 
 end

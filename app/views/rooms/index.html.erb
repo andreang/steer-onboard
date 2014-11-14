@@ -1,3 +1,12 @@
 <h1>Rooms#index</h1>
 <p>Find me in app/views/rooms/index.html.erb</p>
-<%= @rooms %>
+
+<section class="rooms">
+	<%= @rooms.each do |room| %>
+		<div class="room">
+			<h2><%= link_to room.name, room_path(room) %></h2>
+			<p><%= room.address%></p>
+			<p>$<%= room.price_in_pence / 100 %> per wk</p>
+		</div>
+	<% end %>
+</section>
