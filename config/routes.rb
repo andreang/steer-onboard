@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  root 'onboard#index'
+  get 'rooms/index'
+
+  get 'rooms/new'
+
+  get 'rooms/edit'
+
+  root 'rooms#index'
   resources :rooms
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
