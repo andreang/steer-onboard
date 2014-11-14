@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'orders/index'
+
+  get 'orders/new'
+
   get 'users/new'
 
   get 'users/edit'
@@ -9,10 +13,21 @@ Rails.application.routes.draw do
 
   get 'rooms/edit'
 
+  get 'sessions/new'
+
   root 'rooms#index'
-  resources :rooms
-  resources :users, except: [:index, :show]
-  resource :session, only: [:new, :create, :destroy]
+
+  resources :rooms, only: [:index, :show] do
+      resources :orders, only: [:new, :create]
+  end
+
+  resources :users, except: [:index, :show] do
+      resources :rooms, only: [:new, :create, :edit, :update]
+      resources :orders, only: [:show]
+  end
+  
+  resource :session, only: [:new, :create, :destroy] 
+end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -68,4 +83,3 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end

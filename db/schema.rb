@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141114141606) do
+ActiveRecord::Schema.define(version: 20141114174656) do
+
+  create_table "orders", force: true do |t|
+    t.string   "stripe_token"
+    t.integer  "user_id"
+    t.integer  "room_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "rooms", force: true do |t|
     t.integer "price_in_pence"

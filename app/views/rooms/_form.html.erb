@@ -1,0 +1,13 @@
+<%= simple_form_for [@user, @room], url: user_rooms_path(@user) do |form| %>
+	<%= form.input :name %>
+	<%= form.input :price_in_pence %>
+	<%= form.input :name %>
+	<%= form.input :description %>
+	<%= form.input :address %>
+	<%= form.input :phone_number %>
+	<%= form.input :no_of_rooms %>
+	<%= form.input :max_guests %>
+	<%= form.input :pets %>
+
+	<%= form.button :submit %>
+<% end %>

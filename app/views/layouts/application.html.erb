@@ -6,6 +6,49 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+<script type="text/javascript">
+  // This identifies your website in the createToken call below
+  Stripe.setPublishableKey('pk_test_MB1AHc91AogYPuklvhsBY7jX');
+  // ...
+
+  jQuery(function($) {
+  $('#new_order').submit(function(event) {
+    var $form = $(this);
+
+    // Disable the submit button to prevent repeated clicks
+    $form.find('button').prop('disabled', true);
+
+    Stripe.card.createToken($form, stripeResponseHandler);
+
+    // Prevent the form from submitting with the default action
+    return false;
+  });
+});
+
+  function stripeResponseHandler(status, response) {
+  var $form = $('#new_order');
+
+  if (response.error) {
+    // Show the errors on the form
+    $form.find('.payment-errors').text(response.error.message);
+    $form.find('button').prop('disabled', false);
+  } else {
+    // response contains id and card, which contains additional card details
+    var token = response.id;
+    // Insert the token into the form so it gets submitted to the server
+    $form.append($('<input type="hidden" name="order[stripe_token]" />').val(token));
+    // and submit
+    $form.get(0).submit();
+  }
+};
+
+</script>
+
+
+
 </head>
 <body>
 
@@ -22,13 +65,16 @@
     </form>
 
     <nav class="seven columns">
-      <%# link_to "Dashboard", "#" %>
-      <%# link_to "Add a room", "#" %>
-      <%# link_to "Orders", "#" %>
-      <%# link_to "Log out", "#" %>
-
+      <% if current_user? %>
+        <%= current_user.username %>
+        <%= link_to "Dashboard", "#" %>
+        <%= link_to "Add a room", new_user_room_path %>
+        <%= link_to "Orders", "#" %>
+        <%= link_to "Log out", session_path, method: :delete %>
+      <% else %>
       <%= link_to "Sign up", new_user_path %>
       <%= link_to "Sign in", new_session_path %>
+      <% end %>
     </nav>
   </header>
 

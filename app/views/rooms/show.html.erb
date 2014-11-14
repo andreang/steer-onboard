@@ -1,4 +1,4 @@
-<h1>Rooms#show</h1>
+<h1>Rooms</h1>
 
 	<h2><%= @room.name %></h2>
 
@@ -23,9 +23,14 @@
 
 		<p>Enquire about this room with <%= mail_to @room.user.username, @room.user.email %>.</p>
 
-		<div>
-			<%= link_to "Edit", edit_room_path(@room), class: 'button' %>
-			<%= link_to "Delete", edit_room_path(@room), class: 'button', method: :delete %>
-			<%= link_to "Book this room", edit_room_path(@room), class: 'button' %>
+		<div class="actions">
+		<% if current_user? and @room.user.id == current_user.id %>
+			<%= link_to "Edit", edit_user_room_path(current_user, @room), class: 'button' %>
+			<%= link_to "Delete", room_path(@room), class: 'button', method: :delete %>
+		<% elsif current_user? %>
+			<%= link_to "Book this room", new_room_order_path(@room), class: 'button' %>
+		<% else %>
+			<%= link_to "Sign up to book this room!", new_user_path, class: 'button' %>
+		<% end %>
 
 		</div>
